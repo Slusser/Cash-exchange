@@ -267,23 +267,58 @@
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales'],
-          ['2004',  1000],
-          ['2005',  1170],
-          ['2006',  660],
-          ['2007',  1030]
-        ]);
+        const addr = 'https://api.exchangeratesapi.io/history?start_at=2018-01-01&end_at=2018-09-10&base=USD&symbols=EUR'
+    fetch(addr)
+    .then((resp) => resp.json())
+    .then(function(data) {
+      let tabledata_historic = data;
+     var arr= Object.entries(tabledata_historic.rates);
+     var arr2 = new Array
+     var arr_tmp = new Array
+     var arr_tmp2 = new Array
+     var arr_final = new Array
+     for(var i=0;i<arr.length;i++)
+     {
+     arr_tmp[i]= Object.entries(arr[i][1]);
+     arr_tmp2[i]=arr_tmp[i][0]
+     arr2[i]=arr_tmp2[i][1]
+    }
 
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
+
+    for(var j=0;j<arr.length;j++){
+      arr_final[j]=[]
+        arr_final[j][0]=new Date(arr[j][0])
+    }
+    for(var j=0;j<arr.length;j++){
+        arr_final[j][1]=arr2[j]
+    }
+
+    arr_final.sort(sortFunction);
+
+    function sortFunction(a, b) {
+    if (a[0] === b[0]) {
+        return 0;
+    }
+    else {
+        return (a[0] < b[0]) ? -1 : 1;
+    }
+  }
+    var data = google.visualization.arrayToDataTable(arr_final,true)
+    var options = {
+          title: 'Currency ratio',
+          legend: 'none',
+          vAxis: { scaleType: 'date'}
         };
 
+            
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
         chart.draw(data, options);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
       }
     </script>
 
