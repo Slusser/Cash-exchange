@@ -12,6 +12,8 @@
     <script src="https://www.amcharts.com/lib/4/core.js"></script>
     <script src="https://www.amcharts.com/lib/4/charts.js"></script>
     <script src="api.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </head>
 <body style="background-color: #FFFBDB;">
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #D9CA82;">
@@ -31,7 +33,7 @@
   </nav>
   <main>
     <div id="rates">
-    <form onsubmit="return false">
+    <form onsubmit="return false" id="form1">
       <div class="form-row justify-content-center" style="margin-bottom: 5%;margin-top: 5%;"><img src="./img/logo.png" class="img-fluid"  style="max-width: 256px;"></div>
       <div class="form-row justify-content-center">
         <div class="col-md-3 mb-3">
@@ -128,7 +130,101 @@
     </form>    
   </div>
   <div id="charts" style="display: none;" >
-    <div id="chartdiv" style="width: 500px; height: 500px;"></div>
+    <div class="form-row justify-content-center" style="margin-bottom:5%; margin-top: 5%;"><div id="curve_chart"></div></div>
+    <form onsubmit="return false">
+      <div class="form-row justify-content-center">
+        <div class="col-md-3 mb-3">
+          <label for="firstcurr_date">First currency</label>
+          <select class="custom-select form-control" id="firstcurr_date" style="background-color: #F9E9DC;" required>
+            <option value="USD"><div>USD - United States dollar</div></option>
+            <option value="EUR"><div>EUR - Euro</div></option>
+            <option value="GBP"><div>GBP - Pound sterling</div></option>
+            <option value="PLN"><div>PLN - Polish zloty</div></option>
+            <option value="CAD"><div>CAD - Canadian dollar</div></option>
+            <option value="HKD"><div>HKD - Hong Kong dollar</div></option>
+            <option value="ISK"><div>ISK - Icelandic króna</div></option>
+            <option value="PHP"><div>PHP - Philippine peso</div></option>
+            <option value="DKK"><div>DKK - Danish krone</div></option>
+            <option value="HUF"><div>HUF - Hungarian forint</div></option>
+            <option value="CZK"><div>CZK - Czech koruna</div></option>
+            <option value="RON"><div>RON - Romanian leu</div></option>
+            <option value="SEK"><div>SEK - Swedish krona</div></option>
+            <option value="IDR"><div>IDR - Indonesian rupiah</div></option>
+            <option value="INR"><div>INR - Indian rupee</div></option>
+            <option value="BLR"><div>BLR - Belarusian rouble</div></option>
+            <option value="RUB"><div>RUB - Russian rouble</div></option>
+            <option value="HRK"><div>HRK - Croatian kuna</div></option>
+            <option value="JPY"><div>JPY - Japanese yen</div></option>
+            <option value="THB"><div>THB - Thai baht</div></option>
+            <option value="CHF"><div>CHF - Swiss franc</div></option>
+            <option value="MYR"><div>MYR - Malaysian ringgit</div></option>
+            <option value="BGN"><div>BGN - Bulgarian lev</div></option>
+            <option value="TRY"><div>TRY - Turkish lira</div></option>
+            <option value="CNY"><div>CNY - Renminbi</div></option>
+            <option value="NOK"><div>NOK - Norwegian krone</div></option>
+            <option value="NZD"><div>NZD - New Zealand dollar</div></option>
+            <option value="ZAR"><div>ZAR - South African rand</div></option>
+            <option value="MXN"><div>MXN - Mexican peso</div></option>
+            <option value="SGD"><div>SGD - Singapore dollar</div></option>
+            <option value="AUD"><div>AUD - Australian dollar</div></option>
+            <option value="ILS"><div>ILS - Israeli Shekel</div></option>
+            <option value="KRW"><div>KRW - South Korean won</div></option>
+          </select>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="secondcurr_date">Second currency</label>
+          <select class="custom-select form-control" id="secondcurr_date" style="background-color: #F9E9DC;" required>
+            <option value="USD"><div>USD - United States dollar</div></option>
+            <option value="EUR"><div>EUR - Euro</div></option>
+            <option value="GBP"><div>GBP - Pound sterling</div></option>
+            <option value="PLN"><div>PLN - Polish zloty</div></option>
+            <option value="CAD"><div>CAD - Canadian dollar</div></option>
+            <option value="HKD"><div>HKD - Hong Kong dollar</div></option>
+            <option value="ISK"><div>ISK - Icelandic króna</div></option>
+            <option value="PHP"><div>PHP - Philippine peso</div></option>
+            <option value="DKK"><div>DKK - Danish krone</div></option>
+            <option value="HUF"><div>HUF - Hungarian forint</div></option>
+            <option value="CZK"><div>CZK - Czech koruna</div></option>
+            <option value="RON"><div>RON - Romanian leu</div></option>
+            <option value="SEK"><div>SEK - Swedish krona</div></option>
+            <option value="IDR"><div>IDR - Indonesian rupiah</div></option>
+            <option value="INR"><div>INR - Indian rupee</div></option>
+            <option value="BLR"><div>BLR - Belarusian rouble</div></option>
+            <option value="RUB"><div>RUB - Russian rouble</div></option>
+            <option value="HRK"><div>HRK - Croatian kuna</div></option>
+            <option value="JPY"><div>JPY - Japanese yen</div></option>
+            <option value="THB"><div>THB - Thai baht</div></option>
+            <option value="CHF"><div>CHF - Swiss franc</div></option>
+            <option value="MYR"><div>MYR - Malaysian ringgit</div></option>
+            <option value="BGN"><div>BGN - Bulgarian lev</div></option>
+            <option value="TRY"><div>TRY - Turkish lira</div></option>
+            <option value="CNY"><div>CNY - Renminbi</div></option>
+            <option value="NOK"><div>NOK - Norwegian krone</div></option>
+            <option value="NZD"><div>NZD - New Zealand dollar</div></option>
+            <option value="ZAR"><div>ZAR - South African rand</div></option>
+            <option value="MXN"><div>MXN - Mexican peso</div></option>
+            <option value="SGD"><div>SGD - Singapore dollar</div></option>
+            <option value="AUD"><div>AUD - Australian dollar</div></option>
+            <option value="ILS"><div>ILS - Israeli Shekel</div></option>
+            <option value="KRW"><div>KRW - South Korean won</div></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row justify-content-center">
+        <div class="col-md-3 mb-3">
+          <label for="startdate">Start date</label>
+          <input type="date" class="form-control" id="startdate" style="background-color: #F9E9DC;" required>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="enddate">End date</label>
+          <input type="date" class="form-control" id="enddate" style="background-color: #F9E9DC;" required>
+        </div></div>
+        <div class="form-row justify-content-center">
+        <div class="col-md-6 mb-3">
+          <button type="submit" form="form1" value="Submit">Generate</button>
+        </div>
+      </div>
+    </form> 
   </div>
 
   <script>
@@ -166,7 +262,30 @@
    $("#rates").show();
   });
   </script>
+  <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales'],
+          ['2004',  1000],
+          ['2005',  1170],
+          ['2006',  660],
+          ['2007',  1030]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 
 
 </main>
